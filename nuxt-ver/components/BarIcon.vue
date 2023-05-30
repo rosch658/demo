@@ -10,8 +10,6 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-import useData from "../hooks/data.js";
 const props = defineProps(["value"]);
 const { topLevel } = useData();
 </script>

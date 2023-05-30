@@ -1,17 +1,19 @@
 <template>
   <div class="progress-bar">
-    <!-- <transition name="icon" mode="out-in"> -->
+    <!-- VIP icon -->
     <div class="icon" :style="{ width: vipLevel * 10 + '%' }">
-      <progress-icon :value="vipLevel" />
+      <BarIcon :value="vipLevel" />
     </div>
-    <!-- </transition> -->
+    <!-- VIP icon -->
+
+    <!-- 10 bars and gaps -->
     <div class="progress-bar-container">
-      <!-- 10 bars and gaps -->
       <div
         v-for="(_, level) in standards.length - 1"
         class="segment"
         :key="level"
       >
+        <!-- gaps -->
         <div
           class="gap"
           :class="{
@@ -20,7 +22,10 @@
         >
           <div class="vip-tag">VIP{{ level }}</div>
         </div>
-        <progress-bar
+        <!-- gaps -->
+
+        <!-- bar -->
+        <SingleBar
           :class="{
             'progress-first': level === 0,
             'progress-last': level === standards.length - 2,
@@ -30,20 +35,21 @@
           :classNames="{ filled: vipLevel > level }"
           :value="vipLevel > level ? 100 : 0"
           mode="big-bar"
-        ></progress-bar>
+        />
+        <!-- bar -->
+
         <!-- last gap -->
         <div class="gap gap-last" v-if="level === standards.length - 2">
           <div class="vip-tag">VIP{{ level + 1 }}</div>
         </div>
+        <!-- last gap -->
       </div>
+      <!-- 10 bars and gaps -->
     </div>
   </div>
 </template>
 
 <script setup>
-import ProgressIcon from "./ProgressIcon.vue";
-import useData from "../hooks/data.js";
-
 const { standards, vipLevel } = useData();
 </script>
 
@@ -88,31 +94,4 @@ const { standards, vipLevel } = useData();
   position: relative;
   transition: all 0.3s ease-out;
 }
-
-/* .icon-leave-from {
-  transform: translate(-51%, -140%);
-}
-
-.icon-leave-to {
-  opacity: 0;
-  transform: translate(50%, -140%);
-}
-
-.icon-enter-from {
-  opacity: 0.1;
-  transform: translate(-100%, -140%);
-}
-
-.icon-enter-to {
-  opacity: 1;
-  transform: translate(-51%, -140%);
-}
-
-.icon-leave-active {
-  transition: all 0.3s;
-}
-
-.icon-enter-active {
-  transition: all 0.3s ease-out;
-} */
 </style>

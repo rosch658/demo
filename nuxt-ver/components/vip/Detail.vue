@@ -1,23 +1,20 @@
 <template>
-  <div className="detail-container">
-    <div className="text-blue">
+  <div class="detail-container">
+    <div class="text-blue">
       {{ vipCaption }}
     </div>
-    <div className="detail-grid">
+    <div class="detail-grid">
       <span>Cumulative Recharge</span>
-      <progress-bar
+      <SingleBar
         :value="cumulateRechargeRate"
         class="progress-container-regular"
       />
-      <span className="text-blue">
+      <span class="text-blue">
         Need to recharge about {{ pesoNeedRecharge }}
       </span>
       <div>Valid Bet</div>
-      <progress-bar
-        :value="cumulateBetRate"
-        class="progress-container-regular"
-      />
-      <div className="text-blue">
+      <SingleBar :value="cumulateBetRate" class="progress-container-regular" />
+      <div class="text-blue">
         A valid bet of about {{ pesoRequiredBet }} is required
       </div>
     </div>
@@ -25,18 +22,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import useData from "../hooks/data.js";
-
-const {
-  vipLevel,
-  recharge,
-  validBetting,
-  standards,
-  nextLevel,
-  toPeso,
-  topLevel,
-} = useData();
+const { vipLevel, charge, standards, nextLevel, toPeso, topLevel } = useData();
 
 const isTopValue = computed(() => vipLevel.value === topLevel.value);
 
@@ -46,16 +32,16 @@ const vipCaption = computed(() => {
     : `Distance to the next level: VIP${nextLevel.value}`;
 });
 
-const nextLevelStandard = computed(() => standards.value[nextLevel.value]);
+const nextLevelStandard = computed(() => standards[nextLevel.value]);
 
 const needRecharge = computed(() => {
-  if (nextLevelStandard.value > recharge.value) {
-    return nextLevelStandard.value - recharge.value;
+  if (nextLevelStandard.value > charge.recharge) {
+    return nextLevelStandard.value - charge.recharge;
   } else return 0;
 });
 const requiredBet = computed(() => {
-  if (nextLevelStandard.value > validBetting.value) {
-    return nextLevelStandard.value - validBetting.value;
+  if (nextLevelStandard.value > charge.validBetting) {
+    return nextLevelStandard.value - charge.validBetting;
   } else return 0;
 });
 const pesoNeedRecharge = computed(() => {
@@ -68,16 +54,16 @@ const pesoRequiredBet = computed(() => {
 });
 
 const cumulateRechargeRate = computed(() => {
-  if (isTopValue.value || recharge.value > nextLevelStandard.value) return 100;
+  if (isTopValue.value || charge.recharge > nextLevelStandard.value) return 100;
   else {
-    return Math.round((recharge.value / nextLevelStandard.value) * 100);
+    return Math.round((charge.recharge / nextLevelStandard.value) * 100);
   }
 });
 const cumulateBetRate = computed(() => {
-  if (isTopValue.value || validBetting.value > nextLevelStandard.value)
+  if (isTopValue.value || charge.validBetting > nextLevelStandard.value)
     return 100;
   else {
-    return Math.round((validBetting.value / nextLevelStandard.value) * 100);
+    return Math.round((charge.validBetting / nextLevelStandard.value) * 100);
   }
 });
 </script>

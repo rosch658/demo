@@ -19,29 +19,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      rechargeInput: 50,
-      validBetInput: 50,
-    };
-  },
-  computed: {
-    standards() {
-      return this.$store.getters.standards;
-    },
-  },
-  methods: {
-    addRecharge() {
-      this.$store.dispatch("addRecharge", this.rechargeInput);
-    },
+<script setup>
+const { standards, charge, setVipLevel } = useData();
 
-    addValidBet() {
-      this.$store.dispatch("addValidBet", this.validBetInput);
-    },
-  },
-};
+const rechargeInput = ref(50);
+const validBetInput = ref(50);
+
+function addRecharge() {
+  charge.recharge = charge.recharge + rechargeInput.value;
+  setVipLevel();
+}
+function addValidBet() {
+  charge.validBetting = charge.validBetting + validBetInput.value;
+  setVipLevel();
+}
 </script>
 
 <style scoped>

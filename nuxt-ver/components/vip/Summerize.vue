@@ -1,14 +1,14 @@
 <template>
-  <div className="summerize">
-    <div className="sum-container">
-      <div className="img-box">
+  <div class="summerize">
+    <div class="sum-container">
+      <div class="img-box">
         <img :src="image" alt="current level" />
         <h1>{{ vipLevel }}</h1>
       </div>
-      <div className="current-level-box">
-        <div className="current-level">Current Level: VIP{{ vipLevel }}</div>
+      <div class="current-level-box">
+        <div class="current-level">Current Level: VIP{{ vipLevel }}</div>
         <div>
-          <span className="recharge">Recharge: {{ pesoRecharge }}</span>
+          <span class="recharge">Recharge: {{ pesoRecharge }}</span>
           <span>Valid Betting: {{ pesoValidBetting }}</span>
         </div>
       </div>
@@ -18,18 +18,16 @@
 </template>
 
 <script setup>
-import image from "../img/去背2.png";
-import { computed } from "vue";
-import useData from "../hooks/data.js";
+import image from "@/img/去背2.png";
 
-const { vipLevel, recharge, validBetting, toPeso } = useData();
+const { vipLevel, charge, toPeso } = useData();
 
 const pesoRecharge = computed(() => {
-  return toPeso(recharge.value);
+  return toPeso(charge.recharge);
 });
 
 const pesoValidBetting = computed(() => {
-  return toPeso(validBetting.value);
+  return toPeso(charge.validBetting);
 });
 </script>
 

@@ -9,23 +9,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ["value", "mode", "classNames"],
-  computed: {
-    classname() {
-      if (this.mode === "big-bar") {
-        return {
-          "progress-big": true,
-          ...this.classNames,
-        };
-      } else
-        return {
-          "progress-regular": true,
-        };
-    },
-  },
-};
+<script setup>
+const props = defineProps(["value", "mode", "classNames"]);
+
+const classname = computed(() => {
+  if (props.mode === "big-bar") {
+    return {
+      "progress-big": true,
+      ...props.classNames,
+    };
+  } else
+    return {
+      "progress-regular": true,
+    };
+});
 </script>
 
 <style scoped>
