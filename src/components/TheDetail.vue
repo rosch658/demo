@@ -1,15 +1,15 @@
 <template>
-  <div className="detail-container">
-    <div className="text-blue">
+  <div class="detail-container">
+    <div class="text-blue">
       {{ vipCaption }}
     </div>
-    <div className="detail-grid">
+    <div class="detail-grid">
       <span>Cumulative Recharge</span>
       <progress-bar
         :value="cumulateRechargeRate"
         class="progress-container-regular"
       />
-      <span className="text-blue">
+      <span class="text-blue">
         Need to recharge about {{ pesoNeedRecharge }}
       </span>
       <div>Valid Bet</div>
@@ -17,7 +17,7 @@
         :value="cumulateBetRate"
         class="progress-container-regular"
       />
-      <div className="text-blue">
+      <div class="text-blue">
         A valid bet of about {{ pesoRequiredBet }} is required
       </div>
     </div>
@@ -46,7 +46,7 @@ const vipCaption = computed(() => {
     : `Distance to the next level: VIP${nextLevel.value}`;
 });
 
-const nextLevelStandard = computed(() => standards.value[nextLevel.value]);
+const nextLevelStandard = computed(() => standards[nextLevel.value]);
 
 const needRecharge = computed(() => {
   if (nextLevelStandard.value > recharge.value) {

@@ -1,14 +1,14 @@
 <template>
-  <div className="summerize">
-    <div className="sum-container">
-      <div className="img-box">
+  <div class="summerize">
+    <div class="sum-container">
+      <div class="img-box">
         <img :src="image" alt="current level" />
         <h1>{{ vipLevel }}</h1>
       </div>
-      <div className="current-level-box">
-        <div className="current-level">Current Level: VIP{{ vipLevel }}</div>
+      <div class="current-level-box">
+        <div class="current-level">Current Level: VIP{{ vipLevel }}</div>
         <div>
-          <span className="recharge">Recharge: {{ pesoRecharge }}</span>
+          <span class="recharge">Recharge: {{ pesoRecharge }}</span>
           <span>Valid Betting: {{ pesoValidBetting }}</span>
         </div>
       </div>

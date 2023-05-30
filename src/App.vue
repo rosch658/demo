@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div className="app">
-      <the-summerize />
-      <the-bar />
-      <the-detail />
+    <div class="app">
+      <TheSummerize />
+      <TheBar />
+      <TheDetail />
     </div>
-    <the-test />
+    <TheTest />
   </div>
 </template>
 
@@ -16,8 +16,8 @@ import TheTest from "./components/TheTest.vue";
 import TheSummerize from "./components/TheSummerize.vue";
 import useData from "./hooks/data.js";
 
-const { store } = useData();
-store.dispatch("loadLevel");
+const { setVipLevel } = useData();
+setVipLevel();
 </script>
 
 <style>

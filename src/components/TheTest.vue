@@ -19,29 +19,30 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      rechargeInput: 50,
-      validBetInput: 50,
-    };
-  },
-  computed: {
-    standards() {
-      return this.$store.getters.standards;
-    },
-  },
-  methods: {
-    addRecharge() {
-      this.$store.dispatch("addRecharge", this.rechargeInput);
-    },
+<script setup>
+import { ref } from "vue";
+import useData from "../hooks/data.js";
 
-    addValidBet() {
-      this.$store.dispatch("addValidBet", this.validBetInput);
-    },
-  },
-};
+const {
+  standards,
+  validBetting,
+  setValidBet,
+  recharge,
+  setRecharge,
+  setVipLevel,
+} = useData();
+
+const rechargeInput = ref(50);
+const validBetInput = ref(50);
+
+function addRecharge() {
+  setRecharge(recharge.value + rechargeInput.value);
+  setVipLevel();
+}
+function addValidBet() {
+  setValidBet(validBetting.value + validBetInput.value);
+  setVipLevel();
+}
 </script>
 
 <style scoped>
